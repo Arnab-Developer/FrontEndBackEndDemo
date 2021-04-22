@@ -1,0 +1,34 @@
+﻿@model IEnumerable<WeatherForecast>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Weather Forecasts</h2>
+@if (Model == null)
+{
+    <div>No data found</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Date)</td>
+                <td>@Html.DisplayNameFor(model => model.TemperatureC)</td>
+                <td>@Html.DisplayNameFor(model => model.TemperatureF)</td>
+                <td>@Html.DisplayNameFor(model => model.Summary)</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (WeatherForecast weatherForecast in Model)
+            {
+                <tr>
+                    <td>@weatherForecast.Date</td>
+                    <td>@weatherForecast.TemperatureC</td>
+                    <td>@weatherForecast.TemperatureF</td>
+                    <td>@weatherForecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
