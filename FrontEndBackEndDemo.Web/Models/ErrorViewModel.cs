@@ -1,14 +1,13 @@
-namespace FrontEndBackEndDemo.Web.Models
+namespace FrontEndBackEndDemo.Web.Models;
+
+public class ErrorViewModel
 {
-    public class ErrorViewModel
+    public string RequestId { get; set; }
+
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
+    public ErrorViewModel()
     {
-        public string RequestId { get; set; }
-
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-
-        public ErrorViewModel()
-        {
-            RequestId = string.Empty;
-        }
+        RequestId = string.Empty;
     }
 }

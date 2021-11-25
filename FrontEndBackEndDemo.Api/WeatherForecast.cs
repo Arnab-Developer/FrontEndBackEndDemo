@@ -1,20 +1,17 @@
-using System;
+namespace FrontEndBackEndDemo.Api;
 
-namespace FrontEndBackEndDemo.Api
+public class WeatherForecast
 {
-    public class WeatherForecast
+    public DateTime Date { get; set; }
+
+    public int TemperatureC { get; set; }
+
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+
+    public string Summary { get; set; }
+
+    public WeatherForecast()
     {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-        public string Summary { get; set; }
-
-        public WeatherForecast()
-        {
-            Summary = string.Empty;
-        }
+        Summary = string.Empty;
     }
 }

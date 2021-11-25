@@ -19,9 +19,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.101    
+        dotnet-version: 6.0.x
     - name: Build
       run: dotnet build 'FrontEndBackEndDemo.Web/FrontEndBackEndDemo.Web.csproj' --configuration Release
+    - name: Publish
+      run: dotnet publish 'FrontEndBackEndDemo.Web/FrontEndBackEndDemo.Web.csproj' --configuration Release -o 'publish/app'
+    - name: Docker build
+      run: docker build -f 'FrontEndBackEndDemo.Web/Dockerfile' -t docker.pkg.github.com/arnab-developer/frontendbackenddemo/frontend:1.0.2 .
       
   github-docker-push:
     if: ${{ github.event_name == 'push' }}
@@ -34,15 +38,15 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.101    
+        dotnet-version: 6.0.x    
     - name: Publish
       run: dotnet publish 'FrontEndBackEndDemo.Web/FrontEndBackEndDemo.Web.csproj' --configuration Release -o 'publish/app'
     - name: Docker build
-      run: docker build -f 'FrontEndBackEndDemo.Web/Dockerfile' -t docker.pkg.github.com/arnab-developer/frontendbackenddemo/frontend:1.0.1 .
+      run: docker build -f 'FrontEndBackEndDemo.Web/Dockerfile' -t docker.pkg.github.com/arnab-developer/frontendbackenddemo/frontend:1.0.2 .
     - name: Docker push
       run: |
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://docker.pkg.github.com -u Arnab-Developer --password-stdin
-        docker push docker.pkg.github.com/arnab-developer/frontendbackenddemo/frontend:1.0.1
+        docker push docker.pkg.github.com/arnab-developer/frontendbackenddemo/frontend:1.0.2
         docker logout https://docker.pkg.github.com
 
   dockerhub-push:
@@ -59,13 +63,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.101    
+        dotnet-version: 6.0.x    
     - name: Publish
       run: dotnet publish 'FrontEndBackEndDemo.Web/FrontEndBackEndDemo.Web.csproj' --configuration Release -o 'publish/app'
     - name: Docker build
-      run: docker build -f 'FrontEndBackEndDemo.Web/Dockerfile' -t 45862391/frontendbackenddemo-frontend:1.0.1 .
+      run: docker build -f 'FrontEndBackEndDemo.Web/Dockerfile' -t 45862391/frontendbackenddemo-frontend:1.0.2 .
     - name: Docker push
       run: |
         echo "${{ secrets.DOCKERHUB_PWD }}" | docker login -u 45862391 --password-stdin
-        docker push 45862391/frontendbackenddemo-frontend:1.0.1 
+        docker push 45862391/frontendbackenddemo-frontend:1.0.2
         docker logout
