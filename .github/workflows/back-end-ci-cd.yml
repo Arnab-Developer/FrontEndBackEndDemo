@@ -25,7 +25,7 @@ jobs:
     - name: Publish
       run: dotnet publish 'FrontEndBackEndDemo.Api/FrontEndBackEndDemo.Api.csproj' --configuration Release -o 'publish/app'
     - name: Docker build
-      run: docker build -f 'FrontEndBackEndDemo.Api/Dockerfile' -t 45862391/frontendbackenddemo-backend:1.0.2 .
+      run: docker build -f 'FrontEndBackEndDemo.Api/Dockerfile' -t 45862391/frontendbackenddemo-backend:1.0.3 .
       
   github-docker-push:
     if: ${{ github.event_name == 'push' }}
@@ -42,7 +42,7 @@ jobs:
     - name: Publish
       run: dotnet publish 'FrontEndBackEndDemo.Api/FrontEndBackEndDemo.Api.csproj' --configuration Release -o 'publish/app'
     - name: Docker build
-      run: docker build -f 'FrontEndBackEndDemo.Api/Dockerfile' -t ghcr.io/arnab-developer/frontendbackenddemo/backend:1.0.2 .
+      run: docker build -f 'FrontEndBackEndDemo.Api/Dockerfile' -t ghcr.io/arnab-developer/frontendbackenddemo/backend:1.0.3 .
     - name: GitHub Container Registry login
       uses: docker/login-action@v1
       with:
@@ -50,7 +50,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Docker push
-      run: docker push ghcr.io/arnab-developer/frontendbackenddemo/backend:1.0.2
+      run: docker push ghcr.io/arnab-developer/frontendbackenddemo/backend:1.0.3
 
   dockerhub-push:
     if: ${{ github.event_name == 'release' }}
@@ -70,11 +70,11 @@ jobs:
     - name: Publish
       run: dotnet publish 'FrontEndBackEndDemo.Api/FrontEndBackEndDemo.Api.csproj' --configuration Release -o 'publish/app'
     - name: Docker build
-      run: docker build -f 'FrontEndBackEndDemo.Api/Dockerfile' -t 45862391/frontendbackenddemo-backend:1.0.2 .
+      run: docker build -f 'FrontEndBackEndDemo.Api/Dockerfile' -t 45862391/frontendbackenddemo-backend:1.0.3 .
     - name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
         username: ${{ 45862391 }}
         password: ${{ secrets.DOCKERHUB_PWD }}
     - name: Docker push
-      run: docker push 45862391/frontendbackenddemo-backend:1.0.2
+      run: docker push 45862391/frontendbackenddemo-backend:1.0.3
